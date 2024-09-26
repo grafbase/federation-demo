@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@apollo/subgraph": "^2.9.1",
+    "graphql": "*",
+    "graphql-yoga": "^5.7.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.10",
+    "@types/node": "^22.7.2"
+  }
+}
