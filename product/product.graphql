@@ -9,15 +9,6 @@ extend schema
             "@composeDirective"
         ]
     )
-    @link(
-        url: "https://myspecs.dev/myDirective/v1.0"
-        import: ["@myDirective", { name: "@anotherDirective", as: "@hello" }]
-    )
-    @composeDirective(name: "@myDirective")
-    @composeDirective(name: "@hello")
-
-directive @myDirective(a: String!) on FIELD_DEFINITION
-directive @hello on FIELD_DEFINITION
 
 type Query {
     allProducts: [ProductItf]
@@ -46,7 +37,7 @@ type Product implements ProductItf & SkuItf
     @key(fields: "sku variation { id }") {
     id: ID! @tag(name: "hi-from-products")
     sku: String
-    name: String @hello
+    name: String
     package: String
     variation: ProductVariation
     dimensions: ProductDimension

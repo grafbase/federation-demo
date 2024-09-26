@@ -1,0 +1,6 @@
+[graph]
+path = "/graphql"
+introspection = true
+
+[csrf]
+enabled = false
