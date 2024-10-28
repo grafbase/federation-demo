@@ -4,3 +4,9 @@ introspection = true
 
 [csrf]
 enabled = false
+
+[trusted_documents]
+enabled = true
+
+[telemetry.tracing]
+sampling = 1

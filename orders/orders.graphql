@@ -1,0 +1,32 @@
+extend schema
+    @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key"])
+
+type Order @key(fields: "id") {
+    id: ID!
+    customerName: String!
+    items: [OrderItem!]!
+    total: Float!
+}
+
+type OrderItem {
+    product: Product!
+    quantity: Int!
+}
+
+extend type Product @key(fields: "id") {
+    id: ID!
+}
+
+type Query {
+    order(id: ID!): Order
+    orders: [Order]
+}
+
+type Mutation {
+    createOrder(customerName: String!, items: [OrderItemInput!]!): Order
+}
+
+input OrderItemInput {
+    productId: ID!
+    quantity: Int!
+}
