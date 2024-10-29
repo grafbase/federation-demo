@@ -13,7 +13,7 @@ type OrderItem {
     quantity: Int!
 }
 
-extend type Product @key(fields: "id") {
+type Product @key(fields: "id") {
     id: ID!
 }
 

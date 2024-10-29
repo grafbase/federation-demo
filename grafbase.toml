@@ -6,7 +6,7 @@ introspection = true
 enabled = false
 
 [trusted_documents]
-enabled = true
+enabled = false
 
 [telemetry.tracing]
 sampling = 1

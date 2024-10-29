@@ -36,4 +36,4 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 4002
-CMD [ "bun", "./user/server.ts" ]
+CMD [ "bun", "./orders/server.ts" ]

@@ -1,7 +1,7 @@
 extend schema
     @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key"])
 
-extend type Product @key(fields: "id") {
+type Product @key(fields: "id") {
     id: ID!
     stock: Int
     location: String
