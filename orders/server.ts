@@ -1,7 +1,37 @@
 import { parse } from "graphql";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { createYoga } from "graphql-yoga";
-import schema from "./orders.graphql" with { type: "text" };
+
+const typeDefinitions = /* GraphQL */ `
+  extend schema
+    @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key"])
+
+  type Order @key(fields: "id") {
+    id: ID!
+    customerName: String!
+    items: [OrderItem!]!
+    total: Float!
+  }
+
+  type OrderItem {
+    product: Product!
+    quantity: Int!
+  }
+
+  type Product @key(fields: "id") {
+    id: ID!
+  }
+
+  type Query {
+    order(id: ID!): Order
+    orders: [Order]
+  }
+
+  input OrderItemInput {
+    productId: ID!
+    quantity: Int!
+  }
+`;
 
 // Data sources
 const orders = [
@@ -25,21 +55,6 @@ const resolvers = {
       return orders;
     },
   },
-  Mutation: {
-    createOrder: (_, { customerName, items }) => {
-      const newOrder = {
-        id: `order-${orders.length + 1}`,
-        customerName,
-        items,
-        total: items.reduce((sum, item) => {
-          const product = products.find((p) => p.id === item.productId);
-          return sum + (product ? product.price * item.quantity : 0);
-        }, 0),
-      };
-      orders.push(newOrder);
-      return newOrder;
-    },
-  },
   Order: {
     __resolveReference: (reference) => {
       return orders.find((o) => o.id === reference.id);
@@ -55,7 +70,7 @@ const resolvers = {
 async function main() {
   const yoga = createYoga({
     schema: buildSubgraphSchema({
-      typeDefs: parse(schema),
+      typeDefs: parse(typeDefinitions),
       resolvers,
     }),
   });

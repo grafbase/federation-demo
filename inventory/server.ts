@@ -1,7 +1,21 @@
 import { parse } from "graphql";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { createYoga } from "graphql-yoga";
-import schema from "./inventory.graphqls" with { type: "text" };
+
+const typeDefinitions = /* GraphQL */ `
+  extend schema
+    @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key"])
+
+  type Product @key(fields: "id") {
+    id: ID!
+    stock: Int
+    location: String
+  }
+
+  type Query {
+    inventory(productId: ID!): Product
+  }
+`;
 
 // Data sources
 const inventoryData = [
@@ -45,7 +59,7 @@ const resolvers = {
 async function main() {
   const yoga = createYoga({
     schema: buildSubgraphSchema({
-      typeDefs: parse(schema),
+      typeDefs: parse(typeDefinitions),
       resolvers,
     }),
   });

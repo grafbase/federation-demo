@@ -1,7 +1,28 @@
 import { parse } from "graphql";
 import { buildSubgraphSchema } from "@apollo/subgraph";
 import { createYoga } from "graphql-yoga";
-import schema from "./products.graphql" with { type: "text" };
+
+const typeDefinitions = /* GraphQL */ `
+  extend schema
+    @link(
+      url: "https://specs.apollo.dev/federation/v2.3"
+      import: ["@key", "@shareable", "@inaccessible", "@override"]
+    )
+
+  type Product @key(fields: "id") {
+    id: ID!
+    name: String!
+    brand: String!
+    size: Float!
+    color: String!
+    price: Float!
+  }
+
+  type Query {
+    product(id: ID!): Product
+    products: [Product]
+  }
+`;
 
 // Data sources
 const products = [
@@ -42,7 +63,7 @@ const resolvers = {
 async function main() {
   const yoga = createYoga({
     schema: buildSubgraphSchema({
-      typeDefs: parse(schema),
+      typeDefs: parse(typeDefinitions),
       resolvers,
     }),
   });
