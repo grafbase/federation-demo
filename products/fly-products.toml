@@ -7,7 +7,7 @@ app = 'grafbase-federation-demo-product'
 primary_region = 'cdg'
 
 [build]
-dockerfile = 'Dockerfile.products'
+dockerfile = 'Dockerfile'
 
 [http_service]
 internal_port = 4000

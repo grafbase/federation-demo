@@ -7,16 +7,16 @@ app = 'grafbase-federation-demo-orders'
 primary_region = 'cdg'
 
 [build]
-  dockerfile = 'Dockerfile.orders'
+dockerfile = 'Dockerfile'
 
 [http_service]
-  internal_port = 4002
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+internal_port = 4002
+auto_stop_machines = 'stop'
+auto_start_machines = true
+min_machines_running = 0
+processes = ['app']
 
 [[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
-  cpus = 1
+memory = '1gb'
+cpu_kind = 'shared'
+cpus = 1
