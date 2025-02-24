@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for grafbase-federation-demo-inventory on 2024-10-28T16:33:32+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'grafbase-federation-demo-gateway'
+primary_region = 'cdg'
+
+[build]
+dockerfile = 'Dockerfile'
+
+[http_service]
+internal_port = 5000
+auto_start_machines = true
+auto_stop_machines = "stop"
+min_machines_running = 0
+processes = ['app']
+
+[[vm]]
+memory = '1gb'
+cpu_kind = 'shared'
+cpus = 1
