@@ -10,3 +10,6 @@ enabled = false
 
 [telemetry.tracing]
 sampling = 1
+
+[mcp]
+enabled = true
