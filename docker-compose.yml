@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222" # Client connections
+      - "8222:8222" # HTTP monitoring
+      - "6222:6222" # Clustering
+    volumes:
+      - nats_data:/data
+    restart: unless-stopped
+    command: "--jetstream --http_port 8222"
+    networks:
+      - nats_network
+  postgres:
+    image: postgres:latest
+    container_name: orders_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orders_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - orders_pg_data:/var/lib/postgresql/data
+      - ./orders-pg/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  nats_network:
+    driver: bridge
+
+volumes:
+  orders_pg_data:
+    driver: local
+  nats_data:

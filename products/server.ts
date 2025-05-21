@@ -6,8 +6,10 @@ const typeDefinitions = /* GraphQL */ `
   extend schema
     @link(
       url: "https://specs.apollo.dev/federation/v2.3"
-      import: ["@key", "@shareable", "@inaccessible", "@override"]
+      import: ["@key", "@shareable", "@inaccessible", "@override", "@external"]
     )
+
+  directive @derive on FIELD_DEFINITION
 
   type Product @key(fields: "id") {
     id: ID!
@@ -16,6 +18,11 @@ const typeDefinitions = /* GraphQL */ `
     size: Float!
     color: String!
     price: Float!
+    latestCustomer: Customer
+  }
+
+  type Customer @key(fields: "email") {
+    email: String!
   }
 
   type Query {
@@ -33,6 +40,7 @@ const products = [
     size: 9.5,
     color: "Black",
     price: 59.99,
+    latestCustomer: { email: "sophia.w@example.com" },
   },
   {
     id: "vans-1",
@@ -41,6 +49,7 @@ const products = [
     size: 10,
     color: "White",
     price: 49.99,
+    latestCustomer: { email: "john.smith@example.com" },
   },
 ];
 
@@ -66,6 +75,10 @@ async function main() {
       typeDefs: parse(typeDefinitions),
       resolvers,
     }),
+    // Disable @link URL validation
+    validationRules: {
+      skipValidation: true,
+    },
   });
 
   const listenHost = "0.0.0.0";

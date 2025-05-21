@@ -1,0 +1,31 @@
+extend schema
+    @link(
+        url: "https://specs.grafbase.com/composite-schemas/v1"
+        import: ["@derive"]
+    )
+    @link(
+        url: "https://grafbase.com/extensions/rest/0.4.1"
+        import: ["@restEndpoint", "@rest"]
+    )
+    @restEndpoint(name: "factories-api", baseURL: "http://localhost:4001")
+
+type Query {
+    factories: [Factory!]!
+        @rest(
+            method: GET
+            endpoint: "factories-api"
+            path: "/factories"
+            selection: "."
+        )
+}
+
+type Factory {
+    lat: Float!
+    lng: Float!
+    productId: ID!
+    product: Product! @derive
+}
+
+type Product @key(fields: "id") {
+    id: ID!
+}
