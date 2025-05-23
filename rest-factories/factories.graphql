@@ -1,7 +1,7 @@
 extend schema
     @link(
         url: "https://specs.grafbase.com/composite-schemas/v1"
-        import: ["@derive"]
+        import: ["@derive", "@key"]
     )
     @link(
         url: "https://grafbase.com/extensions/rest/0.4.1"
