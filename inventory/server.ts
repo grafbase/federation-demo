@@ -11,10 +11,6 @@ const typeDefinitions = /* GraphQL */ `
     stock: Int
     location: String
   }
-
-  type Query {
-    inventory(productId: ID!): Product
-  }
 `;
 
 // Data sources

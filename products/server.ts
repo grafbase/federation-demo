@@ -9,8 +9,6 @@ const typeDefinitions = /* GraphQL */ `
       import: ["@key", "@shareable", "@inaccessible", "@override", "@external"]
     )
 
-  directive @derive on FIELD_DEFINITION
-
   type Product @key(fields: "id") {
     id: ID!
     name: String!
@@ -18,7 +16,7 @@ const typeDefinitions = /* GraphQL */ `
     size: Float!
     color: String!
     price: Float!
-    latestCustomer: Customer
+    latestCustomer: [Customer!]
   }
 
   type Customer @key(fields: "email") {
