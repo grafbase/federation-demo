@@ -5,7 +5,7 @@ extend schema
     )
     @link(url: "https://specs.apollo.dev/federation/v2.5")
     @link(
-        url: "https://extensions.grafbase.com/extensions/nats/0.4.1"
+        url: "https://extensions.grafbase.com/extensions/nats/0.5.1"
         import: ["@natsPublish", "@natsSubscription"]
     ) {
     subscription: Subscription

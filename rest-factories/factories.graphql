@@ -4,7 +4,7 @@ extend schema
         import: ["@derive", "@key"]
     )
     @link(
-        url: "https://grafbase.com/extensions/rest/0.4.1"
+        url: "https://grafbase.com/extensions/rest/0.5.0"
         import: ["@restEndpoint", "@rest"]
     )
     @restEndpoint(name: "factories-api", baseURL: "http://localhost:4001")
@@ -12,9 +12,8 @@ extend schema
 type Query {
     factories: [Factory!]!
         @rest(
-            method: GET
+            http: { GET: "/factories" }
             endpoint: "factories-api"
-            path: "/factories"
             selection: "."
         )
 }
