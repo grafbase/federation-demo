@@ -18,7 +18,7 @@ input SellProductInput {
 
 type Mutation {
     sellProduct(input: SellProductInput!): Boolean!
-        @natsPublish(subject: "productSales", body: { selection: "*" })
+        @natsPublish(subject: "productSales", body: { selection: "." })
 }
 
 type ProductSale {
