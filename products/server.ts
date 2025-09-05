@@ -16,7 +16,7 @@ const typeDefinitions = /* GraphQL */ `
     size: Float!
     color: String!
     price: Float!
-    latestCustomer: [Customer!]
+    latestCustomer: Customer!
   }
 
   type Customer @key(fields: "email") {
