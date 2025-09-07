@@ -28,7 +28,7 @@ extend schema
     )
     @link(
         url: "https://specs.grafbase.com/composite-schemas/v1"
-        import: ["@lookup", "@key", "@derive"]
+        import: ["@lookup", "@key", "@derive", "@is"]
     )
     @link(
         url: "https://specs.apollo.dev/federation/v2.3"
@@ -1980,7 +1980,7 @@ type Query {
         Filter customers with an array of keys
         """
         lookup: CustomerManyLookupInput @inaccessible
-    ): [Customer]! @pgLookup @lookup @inaccessible
+    ): [Customer] @pgLookup @lookup @inaccessible
     """
     Query a unique OrderItem
     """
@@ -2027,7 +2027,7 @@ type Query {
         Filter orderItems with an array of keys
         """
         lookup: OrderItemManyLookupInput @inaccessible
-    ): [OrderItem]! @pgLookup @lookup @inaccessible
+    ): [OrderItem] @pgLookup @lookup @inaccessible
     """
     Query a unique Order
     """
@@ -2074,7 +2074,7 @@ type Query {
         Filter orders with an array of keys
         """
         lookup: OrderManyLookupInput @inaccessible
-    ): [Order]! @pgLookup @lookup @inaccessible
+    ): [Order] @pgLookup @lookup @inaccessible
     """
     Query a unique PaymentMethod
     """
@@ -2121,7 +2121,7 @@ type Query {
         Filter paymentMethods with an array of keys
         """
         lookup: PaymentMethodManyLookupInput @inaccessible
-    ): [PaymentMethod]! @pgLookup @lookup @inaccessible
+    ): [PaymentMethod] @pgLookup @lookup @inaccessible
 }
 
 type Mutation {
