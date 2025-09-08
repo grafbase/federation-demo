@@ -30,6 +30,30 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  rest-factories:
+    image: oven/bun:latest
+    container_name: rest_factories
+    working_dir: /app
+    volumes:
+      - ./rest-factories:/app
+    ports:
+      - "4001:4001"
+    command: bun run server.ts
+    restart: unless-stopped
+    networks:
+      - nats_network
+  products:
+    image: oven/bun:latest
+    container_name: products
+    working_dir: /app
+    volumes:
+      - ./products:/app
+    ports:
+      - "4000:4000"
+    command: bun run server.ts
+    restart: unless-stopped
+    networks:
+      - nats_network
 
 networks:
   nats_network:
