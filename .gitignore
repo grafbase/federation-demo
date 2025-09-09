@@ -1,5 +1,5 @@
 /.envrc
-/.grafbase
+target/
 
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 
@@ -179,4 +179,5 @@ dist
 
 # Grafbase
 
-/grafbase_extensions
+.grafbase/
+grafbase_extensions/
