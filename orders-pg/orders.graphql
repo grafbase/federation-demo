@@ -1,6 +1,6 @@
 extend schema
   @link(
-    url: "https://grafbase.com/extensions/postgres/0.4.1",
+    url: "https://grafbase.com/extensions/postgres/0.6.1",
     import: [
       "@pgDatabase",
       "@pgTable",
